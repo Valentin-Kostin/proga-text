@@ -1,9 +1,12 @@
 from tkinter import *
 from tkinter import filedialog
 
+
 def clicked():
-    file = filedialog.askopenfilename(filetypes = (("Text files","*.txt"),("all files","*.*")))
-    return file 
+    file = filedialog.askopenfilename(filetypes=(
+        ("Text files", "*.txt"), ("all files", "*.*")))
+    return file
+
 
 def clickedSum():
     for line in file.readlines():
@@ -30,26 +33,23 @@ def clickedSum():
         if j > len(resultData):
             break
 
-    res = numA+numB 
-    print('Длина рабочей подачи: ', numA)
-    print('Длина подачи врезания: ', numB)
-    print('Длина быстрых перемещений: ', numC)
-    print('итого: ', res)
-    lbl = Label(window, text=res)
+    res = (numA+numB)/1000    
+    lbl = Label(window, text='итого: ' + str(res) + ' метров')
     lbl.grid(column=2, row=2)
-    lbl = Label(window, text='Длина рабочей подачи: '+numA)
-    lbl.grid(column=2, row=2)
-    lbl = Label(window, text=res)
-    lbl.grid(column=2, row=2)
-    lbl = Label(window, text=res)
-    lbl.grid(column=2, row=2)
+    lbl2 = Label(window, text='Длина рабочей подачи: ' + str(numA/1000)+ ' метров')
+    lbl2.grid(column=2, row=3)
+    lbl3 = Label(window, text='Длина подачи врезания: ' + str(numB/1000)+ ' метров')
+    lbl3.grid(column=2, row=4)
+    lbl4 = Label(window, text='Длина быстрых перемещений: ' + str(numC/1000)+ ' метров')
+    lbl4.grid(column=2, row=5)
     return res
 
+
 window = Tk()
-window.title("Добро пожаловать!")
+window.title("ПОДСЧЕТ ДЛИНЫ РЕЗА")
 window.geometry('350x200')
 lbl = Label(window, text="Привет!")
-lbl.grid(column=0, row=0)
+lbl.grid(column=2, row=0)
 # txt = Entry(window,width=10)
 # txt.grid(column=1, row=0)
 # btn = Button(window, text="Загрузить файл", command=clicked)
@@ -60,17 +60,15 @@ file = open(trek, 'r', encoding='utf-16')
 resultData = list()
 
 btn = Button(window, text="посчитать", command=clickedSum)
-btn.grid(column=2, row=0)
-
+btn.grid(column=2, row=1)
 
 
 window.mainloop()
 
 
+# file = clicked()
+# file = file('1.txt', 'r', encoding='utf-16')
 
-# file = clicked() 
-# file = file('1.txt', 'r', encoding='utf-16')   
 
-
-#https://habr.com/ru/company/vdsina/blog/557316/
-#https://dvsemenov.ru/tkinter-primery-i-rukovodstvo-kak-delat-gui-na-python/#i-4
+# https://habr.com/ru/company/vdsina/blog/557316/
+# https://dvsemenov.ru/tkinter-primery-i-rukovodstvo-kak-delat-gui-na-python/#i-4
