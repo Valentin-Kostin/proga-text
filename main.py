@@ -2,16 +2,19 @@ from tkinter import *
 from tkinter import filedialog
 
 
-def clicked():
-    file = filedialog.askopenfilename(filetypes=(
+def clicked():    
+    trek = filedialog.askopenfilename(filetypes=(
         ("Text files", "*.txt"), ("all files", "*.*")))
+    file = open(trek, 'r', encoding='utf-16')
     return file
 
 
 def clickedSum():
+    file = clicked()
+    resultData = list()
     for line in file.readlines():
         resultData.append(list(line.split('\n')))  # [0].split(':')
-    file.close()
+    
     numA = 0
     numB = 0
     numC = 0
@@ -42,7 +45,7 @@ def clickedSum():
     lbl3.grid(column=2, row=4)
     lbl4 = Label(window, text='Длина быстрых перемещений: ' + str(numC/1000)+ ' метров')
     lbl4.grid(column=2, row=5)
-    return res
+    file.close()# return res
 
 
 window = Tk()
@@ -50,18 +53,8 @@ window.title("ПОДСЧЕТ ДЛИНЫ РЕЗА")
 window.geometry('350x200')
 lbl = Label(window, text="Привет!")
 lbl.grid(column=2, row=0)
-# txt = Entry(window,width=10)
-# txt.grid(column=1, row=0)
-# btn = Button(window, text="Загрузить файл", command=clicked)
-# btn.grid(column=1, row=0)
-
-trek = clicked()
-file = open(trek, 'r', encoding='utf-16')
-resultData = list()
-
-btn = Button(window, text="посчитать", command=clickedSum)
+btn = Button(window, text="загрузить файл и посчитать", command=clickedSum)
 btn.grid(column=2, row=1)
-
 
 window.mainloop()
 
